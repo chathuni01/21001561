@@ -1,27 +1,27 @@
 import scala.io.StdIn
 
-object Tutorial10_Q2 {
-  def main(args: Array[String]): Unit = {
-    val wordCount = getUserWordCount()
-    val strList: List[String] = getUserInputWords(wordCount)
-    println("Total count of letter occurrences: " + countLetterOccurrences(strList))
-  }
+object LetterCounter {
+    def main(args: Array[String]): Unit = {
+        val wordCount = getUserWordCount()
+        val words: List[String] = getUserInputWords(wordCount)
+        println("Total count of letter occurrences: " + countLetterOccurrences(words))
+    }
 
-  def getUserWordCount(): Int = {
-    println("Enter the number of words:")
-    val wordCount = StdIn.readInt()
-    wordCount
-  }
+    def getUserWordCount(): Int = {
+        println("Enter the number of words:")
+        val wordCount = StdIn.readInt()
+        wordCount
+    }
 
-  def getUserInputWords(wordCount: Int): List[String] = {
-    println(s"Enter those $wordCount words:")
-    val strList = List.fill(wordCount)(StdIn.readLine())
-    strList
-  }
+    def getUserInputWords(wordCount: Int): List[String] = {
+        println(s"Enter those $wordCount words:")
+        val words = List.fill(wordCount)(StdIn.readLine())
+        words
+    }
 
-  def countLetterOccurrences(strList: List[String]): Int = {
-    val strList_lengths = strList.map(str => str.length())
-    val totalLength = strList_lengths.reduce((x, y) => x + y)
-    totalLength
-  }
+    def countLetterOccurrences(words: List[String]): Int = {
+        val letterCounts = words.map(word => word.length)
+        val totalLetterCount = letterCounts.reduce(_ + _)
+        totalLetterCount
+    }
 }
