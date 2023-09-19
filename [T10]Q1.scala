@@ -1,26 +1,28 @@
 import scala.io.StdIn
 
-object Tutorial10_Q1 {
-  def main(args: Array[String]): Unit = {
-    println("Number of temperature values:")
-    val numTemps = StdIn.readInt()
+object TemperatureConverter {
+    def main(args: Array[String]): Unit = {
+        println("Number of temperature values:")
+        val numTemps = StdIn.readInt()
 
-    println(s"What are those $numTemps temperature values in Celsius:")
-    val tempList: List[Double] = List.fill(numTemps)(StdIn.readDouble())
+        println(s"What are those $numTemps temperature values in Celsius:")
+        val temperatures: List[Double] = List.fill(numTemps)(StdIn.readDouble())
 
-    println("Average Fahrenheit Temperature = " + calculateAverage(tempList))
-  }
+        val averageFahrenheit = calculateAverage(temperatures)
 
-  val celciusToFahrenheit = (tempList: List[Double]) => { tempList.map(temp => temp * 1.8 + 32) }
+        println(s"Average Fahrenheit Temperature = $averageFahrenheit")
+    }
 
-  val totalTemp = (tempList: List[Double]) => {
-    tempList.reduce((x, y) => x + y)
-  }
+    
 
-  def calculateAverage(tempList: List[Double]): Double = {
-    val sizeOfList = tempList.size
-    val fahrenheitTempList = celciusToFahrenheit(tempList)
-    val totalFahrenheitTemp = totalTemp(fahrenheitTempList)
-    totalFahrenheitTemp / sizeOfList.toDouble
-  }
+    def calculateAverage(temperatures: List[Double]): Double = {
+        val fahrenheitTemperatures = temperatures.map(celsiusToFahrenheit)
+        val totalFahrenheit = fahrenheitTemperatures.reduce(_ + _)
+        val averageFahrenheit = totalFahrenheit.toDouble / fahrenheitTemperatures.length
+        averageFahrenheit
+    }
+
+    def celsiusToFahrenheit(celsius: Double): Double = {
+        (celsius * 9.0 / 5.0) + 32.0
+    }
 }
